@@ -1,19 +1,54 @@
 <html>
     <head>
         <title>Фотограф Алексей Шаньгин Екатеринбург</title>
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?154"></script>
+        <script>
+            function start() {
+                // 2. Initialize the JavaScript client library.
+                gapi.client.init({
+                'apiKey': 'AIzaSyBSqziCS8hSMPUFWxxTBYs1lYg46bkfi3M',
+                // clientId and scope are optional if auth is not required.
+                'clientId': '914722171175-fedgkdvmps36qcopqtmv3uh1v6sra5iu.apps.googleusercontent.com',
+                'scope': 'profile',
+                }).then(function() {
+                // 3. Initialize and make the API request.
+                return gapi.client.request({
+                    'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
+                })
+                }).then(function(response) {
+                console.log(response.result);
+                }, function(reason) {
+                console.log('Error: ' + reason.result.error.message);
+                });
+            };
+            // 1. Load the JavaScript client library.
+            gapi.load('client', start);
+            </script>
     </head>
     <body>
         <!-- VK Widget -->
         <div>Это мой будущий фото сайт, прошу любить и жаловать</div>
+        <div id="contact_form">
+            <div>
+                <label for="c_name">Введите ваше имя</label>
+                <input id="c_name" type="text" />
+            </div>
+            <div>
+                <label for="c_contact">Как с вами связаться?</label>
+                <input id="c_contact" type="text" />
+            </div>
+            <div>
+                <label>Оставьте информацию о вашем заказе: сроки, какая фотосъемка нужна, вопросы</labe>
+                <textarea rows="4"></textarea>
+            </div>
+            <div>
+                <div class="btn">Отправить</div>
+            </div>
+        </div>
         <div id="vk_community_messages"></div>
-        <div id="vk_contact_us"></div>
         <script type="javascript/text" src="js/script.js"></script>
-        <script type="text/javascript" src="//vk.com/js/api/openapi.js?154"></script>
         <script type="text/javascript">
-            VK.Widgets.CommunityMessages("vk_community_messages", 137462943, {expanded: "0",tooltipButtonText: "Связь с фотографом"});
-        </script>
-        <script type="text/javascript">
-            VK.Widgets.ContactUs("vk_contact_us", {text: "Задайте свой вопрос"}, -137462943);
+            VK.Widgets.CommunityMessages("vk_community_messages", 137462943, {expanded: "1",tooltipButtonText: "Связь с фотографом", onCanNotWrite: function() { alert("Для того, чтобы нам написать, надо авторизоваться вконтакте"); } });
         </script>
 </body>
 </html>
