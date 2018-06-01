@@ -3,14 +3,17 @@
         <title>Фотограф Алексей Шаньгин Екатеринбург</title>
     </head>
     <body>
-
-<!-- VK Widget -->
-    <div>Это мой будущий фото сайт, прошу любить и жаловать</div>
-    <div id="vk_community_messages"></div>
-    <script type="javascript/text" src="js/script.js"></script>
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?154"></script>
-    <script type="text/javascript">
-        VK.Widgets.CommunityMessages("vk_community_messages", 137462943, {expanded: "0",tooltipButtonText: "Связь с фотографом"});
-    </script>
+        <!-- VK Widget -->
+        <div>Это мой будущий фото сайт, прошу любить и жаловать</div>
+        <div id="vk_community_messages"></div>
+        <div id="vk_contact_us"></div>
+        <script type="javascript/text" src="js/script.js"></script>
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?154"></script>
+        <script type="text/javascript">
+            VK.Widgets.CommunityMessages("vk_community_messages", 137462943, {expanded: "0",tooltipButtonText: "Связь с фотографом"});
+        </script>
+        <script type="text/javascript">
+            VK.Widgets.ContactUs("vk_contact_us", {text: "Задайте свой вопрос"}, -137462943);
+        </script>
 </body>
 </html>
