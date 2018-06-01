@@ -26,8 +26,8 @@
         <div id="vk_community_messages"></div>
         <script src="https://apis.google.com/js/api.js"></script>
         <script>
+            var APIKey = 'AIzaSyANcEyViwN6EVDKNWo5JYg0xUlJ6FfNJ0Y';
             function start() {
-                var APIKey = 'AIzaSyANcEyViwN6EVDKNWo5JYg0xUlJ6FfNJ0Y';
                 // 2. Initialize the JavaScript client library.
                 gapi.client.init({
                 'apiKey': APIKey,
@@ -45,8 +45,23 @@
                 console.log('Error: ' + reason.result.error.message);
                 });
             };
+
+            var base64EncodedEmail = Base64.encodeURI(email);
+            function sendMessage(userId, email, callback) {
+            // Using the js-base64 library for encoding:
+            // https://www.npmjs.com/package/js-base64
+            var base64EncodedEmail = Base64.encodeURI(email);
+            var request = gapi.client.gmail.users.messages.send({
+                'apiKey': APIKey,
+                'resource': {
+                'raw': base64EncodedEmail
+                }
+            });
+            request.execute(callback);
+            }
             // 1. Load the JavaScript client library.
             gapi.load('client', start);
+            sendMessage();
             </script>
         <!-- <script type="javascript/text" src="js/script.js"></script>
         <script type="text/javascript">
