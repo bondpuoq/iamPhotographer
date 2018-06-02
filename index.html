@@ -1,10 +1,9 @@
 <html>
     <head>
         <title>Фотограф Алексей Шаньгин Екатеринбург</title>
-        <!-- <script type="text/javascript" src="//vk.com/js/api/openapi.js?154"></script> -->
+        <script type="text/javascript" src="//vk.com/js/api/openapi.js?154"></script>
     </head>
     <body>
-        <!-- VK Widget -->
         <div>Это мой будущий фото сайт, прошу любить и жаловать</div>
         <div id="contact_form">
             <div>
@@ -24,47 +23,9 @@
             </div>
         </div>
         <div id="vk_community_messages"></div>
-        <script src="https://apis.google.com/js/api.js"></script>
-        <script>
-            var APIKey = 'AIzaSyANcEyViwN6EVDKNWo5JYg0xUlJ6FfNJ0Y';
-            function start() {
-                // 2. Initialize the JavaScript client library.
-                gapi.client.init({
-                'apiKey': APIKey,
-                // clientId and scope are optional if auth is not required.
-                'clientId': '914722171175-qou1783rsq3gme1lhr0eijsrugaan166.apps.googleusercontent.com',
-                'scope': 'profile',
-                }).then(function() {
-                // 3. Initialize and make the API request.
-                return gapi.client.request({
-                    'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
-                })
-                }).then(function(response) {
-                console.log(response.result);
-                }, function(reason) {
-                console.log('Error: ' + reason.result.error.message);
-                });
-            };
-
-            function sendMessage(userId, email, callback) {
-            // Using the js-base64 library for encoding:
-            // https://www.npmjs.com/package/js-base64
-            var base64EncodedEmail = window.btoa(email);
-            var request = gapi.client.gmail.users.messages.send({
-                'apiKey': APIKey,
-                'resource': {
-                'raw': base64EncodedEmail
-                }
-            });
-            request.execute(callback);
-            }
-            // 1. Load the JavaScript client library.
-            gapi.load('client', start);
-            sendMessage(APIKey, "bondpuoq@gmail.com", callback);
-            </script>
-        <!-- <script type="javascript/text" src="js/script.js"></script>
+        <script type="javascript/text" src="js/script.js"></script>
         <script type="text/javascript">
             VK.Widgets.CommunityMessages("vk_community_messages", 137462943, {expanded: "1",tooltipButtonText: "Связь с фотографом", onCanNotWrite: function() { alert("Для того, чтобы нам написать, надо авторизоваться вконтакте"); } });
-        </script> -->
+        </script>
 </body>
 </html>
