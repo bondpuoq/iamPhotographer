@@ -65,14 +65,14 @@ Muse.Utils.saveHyperlinkInfo = function (a, b, c, d, g) {
     var f = a.attr("href"), j = Muse.Utils.pathOnly(f), h = -1, i = a.attr("target"), k = window.location.href.replace(/#.*$/i, ""); if (f && -1 != f.indexOf("#") && !(i && i != "_self") && !(0 <= j.indexOf("/")) && (k.charAt(k.length - 1) == "/" && (k += "index.html"), -1 != k.indexOf("/" + j, k.length - j.length - 1))) {
         var j = $(window).data("scrollWrapper"), l = f.substring(f.lastIndexOf("#")), a = a.parent('[class~="sbg"]').length > 0 || a.hasClass("block") ? a.parent() : a, m = "#" + a.attr("id"), b = "." + b; if (null !== Muse.Utils.allStyleSheetRules(c,
             function (a) { return 0 <= a.indexOf(m + b) || 0 <= a.indexOf(b + m) })) {
-                i = 0; for (k = g.length; i < k; i++)if (g[i].href == f) { h = i; break } if (-1 == h) {
-                    c = Muse.Utils.getAnchorWithDestination(l); if (c.length === 0) return; i = j && !j.isStandard(); d = Math.floor(d ? c.offset().left + (i ? j.scrollLeft() : 0) : c.offset().top + (i ? j.scrollTop() : 0)); j = Number.MAX_VALUE; i = 0; for (k = g.length; i < k; i++)if (g[i].href != f && g[i].from == d) { h = i; break } if (-1 == h) {
-                        i = 0; for (k = g.length; i < k; i++) { h = g[i]; if (h.from < d && d < h.to) { j = h.to; h.to = d - 1; break } h.from <= j && (j = h.from - 1) } g.push({
-                            hyperLinks: [],
-                            from: d, to: j, $elem: c, href: f
-                        }); h = g.length - 1
-                    }
-                } g[h].hyperLinks.push(a)
+            i = 0; for (k = g.length; i < k; i++)if (g[i].href == f) { h = i; break } if (-1 == h) {
+                c = Muse.Utils.getAnchorWithDestination(l); if (c.length === 0) return; i = j && !j.isStandard(); d = Math.floor(d ? c.offset().left + (i ? j.scrollLeft() : 0) : c.offset().top + (i ? j.scrollTop() : 0)); j = Number.MAX_VALUE; i = 0; for (k = g.length; i < k; i++)if (g[i].href != f && g[i].from == d) { h = i; break } if (-1 == h) {
+                    i = 0; for (k = g.length; i < k; i++) { h = g[i]; if (h.from < d && d < h.to) { j = h.to; h.to = d - 1; break } h.from <= j && (j = h.from - 1) } g.push({
+                        hyperLinks: [],
+                        from: d, to: j, $elem: c, href: f
+                    }); h = g.length - 1
+                }
+            } g[h].hyperLinks.push(a)
         }
     }
 }; Muse.Utils.isIBE = function () { return Muse.Utils.readCookie("inbrowserediting") == "true" }; Muse.Utils.includeMEditableTags = function (a) { if (!a || a.length == 0 || !Muse.Utils.isIBE()) return a; return a.map(function () { var a = $(this).parent("div[contenteditable][region-id][template][data-ice-editableid][data-ice-editable]"); return a && a.length ? a.get() : this }) };
@@ -173,12 +173,12 @@ Muse.Utils.VimeoVideoHelper = function (a) {
             })
         }
     }; f.prototype.activate = function (a) { this.initializeHiDPIButton(a); f.isRetina && (!f.shouldUseCookie || "hidpi" == f.getResolutionPreference()) ? this.hidpiMode(a) : this.standardMode(a) }; f.prototype.getCurrentMode = function () { return this._mode }; f.prototype.setCurrentMode = function (a) {
-    this._mode = a; if (f.isRetina) {
-        switch (a) {
-            case "standard": g.removeClass("on").addClass("off"); break; case "hidpi": g.removeClass("off").addClass("on"); break; default: Muse.Assert.assert(!1,
-                "Unknown mode: " + a)
-        }f.shouldUseCookie && f.saveResolutionPreference(a)
-    }
+        this._mode = a; if (f.isRetina) {
+            switch (a) {
+                case "standard": g.removeClass("on").addClass("off"); break; case "hidpi": g.removeClass("off").addClass("on"); break; default: Muse.Assert.assert(!1,
+                    "Unknown mode: " + a)
+            }f.shouldUseCookie && f.saveResolutionPreference(a)
+        }
     }; f.prototype.standardMode = function (c) { this.setCurrentMode("standard"); b.removeClass("hidpi"); a("img", c).each(function () { f.swapSources(a(this), "src", "hidpi-src") }) }; f.prototype.hidpiMode = function (c) { this.setCurrentMode("hidpi"); b.addClass("hidpi"); a("img", c).each(function () { f.swapSources(a(this), "hidpi-src", "src") }) }; f.prototype.getDataSrcAttrName = function () { return "standard" == this._mode ? c : d }; a(window).data("ResolutionManager", new f)
 })(jQuery);
 Muse.Utils.detectScreenResolution = function () { var a = $(window).data("ResolutionManager"); if (0 < $(".breakpoint").length) { var b = {}; $("body").on("muse_bp_activate", function (c, d, g) { c = g.attr("id"); b[c] || (a.activate(g), b[c] = !0) }) } else a.activate() }; Muse.Utils.createCookie = function (a, b, c) { if (c) { var d = new Date; d.setTime(d.getTime() + c * 864E5); c = "; expires=" + d.toGMTString() } else c = ""; document.cookie = a + "=" + b + c + "; path=/" };
@@ -199,17 +199,17 @@ Muse.Browser.Bugs.ClearNeedsOuterWidth = function () {
 Muse.Browser.Bugs.ScrollWidthHeightIncludesBorder = function () { var a = !1, b = $("<div>").css({ border: "1px solid #000000;", width: 100, height: 100, position: "absolute", top: -99999, left: -99999, padding: 0, margin: 0, overflow: "auto" }).appendTo(document.body)[0]; b.scrollHeight !== b.clientHeight && (a = !0); $(b).remove(); return a }();
 (function (a) {
     var b = a(window), c = a("body"), d = function () { this.pendingRequest = void 0; this.enabled = !0 }; d.prototype.init = function (d) {
-    this.$spacer = a(".verticalspacer", d); this.$page = d; this.spacerMinHeight = Muse.Utils.getCSSIntValue(this.$spacer, "min-height"); c.removeClass("no_vert_scroll"); this.$spacer.removeAttr("style"); this.$spacer.height() < this.spacerMinHeight && this.$spacer.height(Math.floor(this.spacerMinHeight + 1)); this.spacerHeight = this.$spacer.height(); this.pageMarginTop = Muse.Utils.getCSSIntValue(c,
-        "padding-top") + Muse.Utils.getCSSIntValue(c, "margin-top"); this.pageMarginBottom = Muse.Utils.getCSSIntValue(c, "padding-bottom") + Muse.Utils.getCSSIntValue(c, "margin-bottom"); this.pageResizeWatchEnabled = !0; this.alwaysVertScroll = c.hasClass("always_vert_scroll"); var f = this; this.calculateInitialSpacerHeight(); this.$page.watch("height", function () { f.onPageHeightChanged() }); b.resize(function () { f.doUpdate() }); this.initialized = !0; this.doUpdate(this.pendingRequest)
+        this.$spacer = a(".verticalspacer", d); this.$page = d; this.spacerMinHeight = Muse.Utils.getCSSIntValue(this.$spacer, "min-height"); c.removeClass("no_vert_scroll"); this.$spacer.removeAttr("style"); this.$spacer.height() < this.spacerMinHeight && this.$spacer.height(Math.floor(this.spacerMinHeight + 1)); this.spacerHeight = this.$spacer.height(); this.pageMarginTop = Muse.Utils.getCSSIntValue(c,
+            "padding-top") + Muse.Utils.getCSSIntValue(c, "margin-top"); this.pageMarginBottom = Muse.Utils.getCSSIntValue(c, "padding-bottom") + Muse.Utils.getCSSIntValue(c, "margin-bottom"); this.pageResizeWatchEnabled = !0; this.alwaysVertScroll = c.hasClass("always_vert_scroll"); var f = this; this.calculateInitialSpacerHeight(); this.$page.watch("height", function () { f.onPageHeightChanged() }); b.resize(function () { f.doUpdate() }); this.initialized = !0; this.doUpdate(this.pendingRequest)
     }; d.prototype.updateScrollClass = function (a) {
         var a =
             this.spacerMinHeight < Math.floor(a * 100) / 100, b = !1; this.alwaysVertScroll || (a && !c.hasClass("no_vert_scroll") ? (c.addClass("no_vert_scroll"), b = !0) : !a && c.hasClass("no_vert_scroll") && (c.removeClass("no_vert_scroll"), b = !0)); b && this.$spacer.css("height")
     }; d.prototype.doUpdate = function (a) {
         if (this.enabled) if (this.initialized) {
-        parseInt(a) || (a = 0); var c = this.$page.outerHeight(!0), d = c - this.spacerHeight, a = Math.max(this.spacerMinHeight, b.height() - this.pageMarginTop - this.pageMarginBottom - d - a); if (a != this.spacerHeight) {
-        this.pageResizeWatchEnabled =
-            !1; this.updateScrollClass(a); this.$spacer.css("height", a); if (a < this.spacerHeight && c == this.$page.outerHeight(!0)) a = this.spacerHeight, this.updateScrollClass(a), this.$spacer.css("height", a); this.pageResizeWatchEnabled = !0
-        } return this.spacerHeight = a
+            parseInt(a) || (a = 0); var c = this.$page.outerHeight(!0), d = c - this.spacerHeight, a = Math.max(this.spacerMinHeight, b.height() - this.pageMarginTop - this.pageMarginBottom - d - a); if (a != this.spacerHeight) {
+                this.pageResizeWatchEnabled =
+                    !1; this.updateScrollClass(a); this.$spacer.css("height", a); if (a < this.spacerHeight && c == this.$page.outerHeight(!0)) a = this.spacerHeight, this.updateScrollClass(a), this.$spacer.css("height", a); this.pageResizeWatchEnabled = !0
+            } return this.spacerHeight = a
         } else this.pendingRequest = a
     }; d.prototype.calculateInitialSpacerHeight = function () { for (var a = 0, b = 0; b++ < 20;) { var c = this.doUpdate(); if (c <= a) break; a = c } }; d.prototype.onPageHeightChanged = function (a) { this.pageResizeWatchEnabled && this.doUpdate(a) }; d.prototype.enable =
         function () { this.enabled = !0 }; d.prototype.disable = function () { this.enabled = !1 }; b.data("stickyFooter", new d("#page"))
